@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
-#include <bcm2835.h>
+#include <wiringPi.h>
 #include <sched.h>
 #include <unistd.h>
 
@@ -66,24 +66,24 @@ long readDHT(int type, int pin, float &temperature, float &humidity)
 	// set up as real-time scheduling as possible
 	set_max_priority();
 
-	bcm2835_gpio_fsel(pin, BCM2835_GPIO_FSEL_OUTP);
-	bcm2835_gpio_write(pin, HIGH);
+	pinMode (pin, OUTPUT);
+	digitalWrite (pin, HIGH);
 	usleep(10000);
-	bcm2835_gpio_write(pin, LOW);
+	digitalWrite (pin, LOW);
 	usleep(type == 11 ? 2500 : 800);
-	bcm2835_gpio_write(pin, HIGH);
+	digitalWrite (pin, HIGH);
 
-  bcm2835_gpio_fsel(pin, BCM2835_GPIO_FSEL_INPT);
+  pinMode (pin, INPUT) ;
 
-	for (timeout = 0; timeout < 100000 && bcm2835_gpio_lev(pin) == 0; timeout++);
+	for (timeout = 0; timeout < 100000 && digitalRead(pin) == 0; timeout++);
 	if (timeout >= 100000) { set_default_priority(); return -3; }
-	for (timeout = 0; timeout < 100000 && bcm2835_gpio_lev(pin) == 1; timeout++);
+	for (timeout = 0; timeout < 100000 && digitalRead(pin) == 1; timeout++);
 	if (timeout >= 100000) { set_default_priority(); return -3; }
 
 	// read data!
 	for (j = 0; j < MAXTIMINGS; ++j) {
-		for (timeout = 0; bcm2835_gpio_lev(pin) == LOW && timeout <= 800; ++timeout);
-		for (timeout = 0; bcm2835_gpio_lev(pin) == HIGH && timeout <= 800; ++timeout);
+		for (timeout = 0; digitalRead(pin) == LOW && timeout <= 800; ++timeout);
+		for (timeout = 0; digitalRead(pin) == HIGH && timeout <= 800; ++timeout);
 		bits[j] = timeout;
 		if (timeout > 800) break;
 	}
@@ -180,20 +180,8 @@ long readDHT(int type, int pin, float &temperature, float &humidity)
 
 int initialize()
 {
-  if (!bcm2835_init())
-  {
-#ifdef VERBOSE
-    printf("BCM2835 initialization failed.\n");
-#endif
-    return 1;
-  }
-  else
-  {
-#ifdef VERBOSE
-    printf("BCM2835 initialized.\n");
-#endif
-    initialized = 1;
-    memset(last_read, 0, sizeof(unsigned long long)*32);
-    return 0;
-  }
+  wiringPiSetup ();
+  initialized = 1;
+  memset(last_read, 0, sizeof(unsigned long long)*32);
+  return 0;
 }
