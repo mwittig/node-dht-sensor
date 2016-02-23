@@ -180,7 +180,7 @@ int initialize()
     schedp.sched_priority = 1;
     sched_setscheduler(0, SCHED_FIFO, &schedp);
     
-    wiringPiSetup ();
+    wiringPiSetupGpio();
     
     initialized = 1;
     memset(last_read, 0, sizeof(unsigned long long)*32);
