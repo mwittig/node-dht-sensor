@@ -8,7 +8,7 @@ I made the following adjustments:
 
 ## Installation
 ``` bash
-$ pm install git+https://github.com/HardwareProjects/node-dht-sensor.git
+$ npm install git+https://github.com/HardwareProjects/node-dht-sensor.git
 ```
 
 See http://wiringpi.com/wiringpi-update-to-2-29/ for using it without being roo or using sudo.
