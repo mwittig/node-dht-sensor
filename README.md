@@ -11,4 +11,4 @@ I made the following adjustments:
 $ npm install git+https://github.com/HardwareProjects/node-dht-sensor.git
 ```
 
-See http://wiringpi.com/wiringpi-update-to-2-29/ for using it without being roo or using sudo.
+See http://wiringpi.com/wiringpi-update-to-2-29/ for using it without being root or using sudo.
