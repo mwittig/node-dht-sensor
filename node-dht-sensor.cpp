@@ -74,7 +74,7 @@ long readDHT(int type, int pin, float &temperature, float &humidity)
     delay(20);
 
     pinMode (pin, INPUT) ;
-	
+
     data[0] = data[1] = data[2] = data[3] = data[4] = 0;
     
     // wait for pin to drop?
