@@ -6,6 +6,9 @@
   "repository": {
     "url": "https://github.com/momenso/node-dht-sensor"
   },
+  "scripts": {
+    "preinstall": "./preinst"
+  },
   "main": "./build/Release/node_dht_sensor",
   "dependencies": {
     "nan": "^2.2.0"
