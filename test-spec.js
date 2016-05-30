@@ -1,12 +1,12 @@
 // Module node-dht-sensor demo
 // Reads from two DHT sensors
 
-var sensorLib = require('./build/Release/node-dht-sensor');
+var sensorLib = require('./build/Release/node_dht_sensor');
 
 var sensor = {
   sensors: [ 
-    { name: 'Indoor', type: 11, pin: 17 },
-    { name: 'Outdoor', type: 22, pin: 4 }
+    { name: 'Indoor', type: 11, pin: 27 },
+    { name: 'Outdoor', type: 22, pin: 17 }
   ],
 
   read: function() {
