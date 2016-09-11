@@ -5,8 +5,7 @@
 #include <sched.h>
 #include <unistd.h>
 
-#define BCM2708_PERI_BASE   0x20000000
-#define GPIO_BASE           (BCM2708_PERI_BASE + 0x200000)
+
 #define MAXTIMINGS          100
 #define DHT11               11
 #define DHT22               22
