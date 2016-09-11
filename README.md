@@ -9,7 +9,7 @@ $ npm install node-dht-sensor
 
 ## Usage
 
-This module uses the [BCM2835](http://www.airspayce.com/mikem/bcm2835/) library that requires access to 
+This module uses the [wiringPi](http://wiringpi.com/download-and-install/) library that requires access to 
 /open/mem. Because of this, you will typically run node with admin privileges.
 
 The first step is initializing the sensor by specifying the sensor type and which GPIO pin the sensor is connected. It should work for DHT11, DHT22 and AM2302 sensors. If the initialization succeeds when you can call the read function to obtain the latest readout from the sensor. Readout values contains a temperature and a humidity property.
@@ -108,7 +108,7 @@ Verbose output from the module can be enabled by defining ```VERBOSE``` during t
     {
       'target_name': 'node-dht-sensor',
       'sources': [ 'node-dht-sensor.cpp' ],
-      'libraries': [ '-lbcm2835' ],
+      'libraries': [ '-wiringPi' ],
       'defines': [ 'VERBOSE']
     }
   ]
@@ -128,7 +128,7 @@ $ sudo dpkg -i node_latest_armhf.deb
 
 [1]: Node.js latest release - http://nodejs.org/dist/latest/
 
-[2]: BCM2835 - http://www.airspayce.com/mikem/bcm2835/
+[2]: BCM2835 - http://wiringpi.com/download-and-install/
 
 [3]: Node.js native addon build tool - https://github.com/TooTallNate/node-gyp
 
